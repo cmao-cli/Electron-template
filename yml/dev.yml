@@ -1,0 +1,25 @@
+publish:
+- provider: generic
+  url: 
+appId: 
+productName: 
+asar: false
+win:
+  publisherName: 
+  rfc3161TimeStampServer: http://sha256timestamp.ws.symantec.com/sha256/timestamp
+  timeStampServer: http://timestamp.globalsign.com/scripts/timstamp.dll
+linux:
+  category: Education
+files:
+- "**/*"
+- "build/**/*"
+- "!.arcconfig"
+- "!config"
+- "!dist"
+- "!dist-dev"
+- "!dist-staging"
+- "!dist-test"
+- "!yml"
+- "!scripts"
+directories:
+  output: dist-dev

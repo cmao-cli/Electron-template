@@ -43,3 +43,4 @@ dist-dev
 dist-test
 dist-staging
 dist
+qiniu.json
