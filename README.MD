@@ -78,6 +78,9 @@ directories:
 ### 开发
 执行：`npm run start`
 npm run start会同时启动渲染进程和主进程。
+执行：`npm run watch`
+需要先修改start-main-dev命令中wait-on监听的端口为项目端口。
+启动项目的同时监听electron文件内容变化。
 ```js
 "start": "cross-env NODE_ENV=development npm run start-renderer-dev & npm run start-main-dev",
 "start-main-dev": "cross-env NODE_ENV=development electron ./src/main-process/main.js",

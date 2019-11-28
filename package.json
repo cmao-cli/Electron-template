@@ -4,8 +4,9 @@
   "description": "",
   "main": "./src/main-process/main.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development npm run start-renderer-dev & npm run start-main-dev",
-    "start-main-dev": "cross-env NODE_ENV=development electron ./src/main-process/main.js",
+    "start": "concurrently \"npm run start-renderer-dev\" \"npm run start-main-dev\"",
+    "watch": "concurrently \"npm run start-renderer-dev\" \"nodemon --delay 10ms --watch ./src/main-process --exec npm run start-main-dev\"",
+    "start-main-dev": "wait-on http://localhost:8080 && cross-env NODE_ENV=development electron ./src/main-process/main.js",
     "start-renderer-dev": "cross-env NODE_ENV=development yuumi serve ./src/app/index.tsx",
     "build-renderer": "cross-env NODE_ENV=production yuumi build ./src/app/index.tsx",
     "package": "npm run build-renderer && node ./scripts/build.js"
@@ -33,7 +34,10 @@
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^2.2.4",
     "qiniu": "^7.2.2",
-    "yaml": "^1.7.2"
+    "yaml": "^1.7.2",
+    "nodemon": "^2.0.1",
+    "wait-on": "^3.3.0",
+    "concurrently": "^5.0.0"
   },
   "dependencies": {
     "@mlz/axios": "^1.0.1",
