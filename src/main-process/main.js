@@ -1,6 +1,6 @@
 
 const { app, BrowserWindow } = require('electron');
-// const { AppUpdater } from './app-updater';
+const { initDebugger } = require('./utils/debugger');
 const url = require('url') ;
 const path = require('path');
 
@@ -8,7 +8,7 @@ let mainWindow;
 
 
 if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')();
+  initDebugger();
 }
 
 // const installExtensions = async () => {

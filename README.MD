@@ -39,6 +39,7 @@
 ```
 
 ### 开发之前初始化项目配置(很重要)
+[官网地址](https://www.electron.build/configuration/configuration)
 1. `yml/dev.yml`
 需要配置yml/dev.yml中以下空项，并且在yml文件夹下创建不同环境的配置
 ```js
@@ -55,16 +56,10 @@ win:
 linux:
   category: Education
 files:
-- "**/*"
-- "build/**/*"
-- "!.arcconfig"
-- "!config"
-- "!dist"
-- "!dist-dev"
-- "!dist-staging"
-- "!dist-test"
-- "!yml"
-- "!scripts"
+- "node_modules/**"
+- "build/**"
+- "src/**"
+- "!src/app"
 directories:
   output: dist-dev
 ```
