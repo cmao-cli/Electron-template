@@ -47,7 +47,7 @@ function build(env) {
   child_process.execSync(`cross-env NODE_ENV=${env} platform=${OS} node ${configPath}`, {stdio: 'inherit'});
   console.log('重写配置成功');
   console.log('正在打包');
-  let cmd = `cross-env CSC_LINK=${MAC_CSC_LINK} ${CSC_KEY_PASSWORD} CSC_IDENTITY_AUTO_DISCOVERY=true npx electron-builder --config ${buildCfgPath}`;
+  let cmd = `cross-env CSC_LINK=${MAC_CSC_LINK} CSC_KEY_PASSWORD=${CSC_KEY_PASSWORD} CSC_IDENTITY_AUTO_DISCOVERY=true npx electron-builder --config ${buildCfgPath}`;
   if (OS === 'win') {
     cmd = `cross-env npx electron-builder --win --x64 --ia32 --config ${buildCfgPath}`;
     if (env === 'production') {

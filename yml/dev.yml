@@ -11,15 +11,9 @@ win:
 linux:
   category: Education
 files:
-- "**/*"
-- "build/**/*"
-- "!.arcconfig"
-- "!config"
-- "!dist"
-- "!dist-dev"
-- "!dist-staging"
-- "!dist-test"
-- "!yml"
-- "!scripts"
+- "node_modules/**"
+- "build/**"
+- "src/**"
+- "!src/app"
 directories:
   output: dist-dev
