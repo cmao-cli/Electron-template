@@ -6,11 +6,6 @@ const path = require('path');
 
 let mainWindow;
 
-
-if (process.env.NODE_ENV === 'development') {
-  initDebugger();
-}
-
 // const installExtensions = async () => {
 //   console.log('Running in development');
 //   const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
@@ -34,7 +29,7 @@ app.on('ready', async () => {
     height: 728
   });
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.webContents.openDevTools();
+    initDebugger();
     // await installExtensions();
     // 开发环境下的时候加载的是远程地址
     mainWindow.loadURL('http://localhost:8080');
