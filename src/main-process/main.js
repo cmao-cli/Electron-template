@@ -1,5 +1,5 @@
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 // const { AppUpdater } from './app-updater';
 const url = require('url') ;
 const path = require('path');
@@ -31,7 +31,12 @@ app.on('ready', async () => {
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
-    height: 728
+    height: 728,
+    webPreferences: {
+      webviewTag: true,
+      nodeIntegration: true,
+      // webSecurity: false,
+    },
   });
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools();
@@ -58,4 +63,9 @@ app.on('ready', async () => {
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   // new AppUpdater();
+  ipcMain.on('echo', (event, userInfo) => {
+    console.log('event is', event);
+    console.log('userInfo is', userInfo);
+    // userInfo.say(); 由于消息被序列化，没有方法和原型链
+  })
 });
