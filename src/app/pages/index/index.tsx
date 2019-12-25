@@ -6,7 +6,7 @@ import { IDemoState, addNum, minusNum } from '../../redux/demo';
 import * as cx from 'classnames';
 
 import { remote, ipcRenderer  } from 'electron';
-const { shell } = remote
+const { shell } = remote;
 
 import './index.scss';
 

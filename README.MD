@@ -88,6 +88,42 @@ package发包不同环境和不同平台的包
 `"package": "npm run build-renderer && node ./scripts/build.js","`
 
 
+### 进程间通信
+主进程和渲染进程间通信有两种方式：
+#### 1. ipcMain + ipcRenderer
+```js
+
+// 渲染进程
+import { ipcRenderer  } from 'electron';
+//注： send方法发送的消息会被electron序列化,主进程收到的信息中将没有方法和原型
+ipcRenderer.send('echo', {
+  name: 'luoqian',
+  age: 23,
+  say: () => {
+    console.log('my name is luoqian');
+  }
+});
+
+
+// 主进程
+ipcMain.on('echo', (event, userInfo) => {
+  console.log('event is', event);
+  console.log('userInfo is', userInfo);
+  // userInfo.say(); 将会报错，由于消息被序列化，没有方法和原型链
+})
+```
+
+#### 2. 一种快捷的通信方式`remote`
+remote提供了一种简便的，无侵入的形式来访问主进程的API和数据。
+```js
+import { remote } from 'electron';
+const { shell } = remote;
+
+shell.openExternal('http://www.baidu.com');
+```
+其实remote底层就是基于同步的IPC,具体的实现原理可以参考：[揭开Electron remote模块的神秘面纱](https://juejin.im/post/5d4b79a3e51d4561b072dcb0#heading-4)。虽然使用remote很方便，但是不要滥用，需要注意remote是同步的，不要频繁使用以至于阻塞用户交互体验。
+
+
 ### 自动更新流程
 在渲染进程初始化的时候中发起`detect_update`的消息到主进程中
 主进程监听到detect_update的消息后调用`checkForUpdates`, 查询服务器是否需要更新
