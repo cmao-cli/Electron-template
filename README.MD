@@ -39,6 +39,7 @@
 ```
 
 ### 开发之前初始化项目配置(很重要)
+[官网地址](https://www.electron.build/configuration/configuration)
 1. `yml/dev.yml`
 需要配置yml/dev.yml中以下空项，并且在yml文件夹下创建不同环境的配置
 ```js
@@ -55,16 +56,10 @@ win:
 linux:
   category: Education
 files:
-- "**/*"
-- "build/**/*"
-- "!.arcconfig"
-- "!config"
-- "!dist"
-- "!dist-dev"
-- "!dist-staging"
-- "!dist-test"
-- "!yml"
-- "!scripts"
+- "node_modules/**"
+- "build/**"
+- "src/**"
+- "!src/app"
 directories:
   output: dist-dev
 ```
@@ -78,6 +73,9 @@ directories:
 ### 开发
 执行：`npm run start`
 npm run start会同时启动渲染进程和主进程。
+执行：`npm run watch`
+需要先修改start-main-dev命令中wait-on监听的端口为项目端口。
+启动项目的同时监听electron文件内容变化。
 ```js
 "start": "cross-env NODE_ENV=development npm run start-renderer-dev & npm run start-main-dev",
 "start-main-dev": "cross-env NODE_ENV=development electron ./src/main-process/main.js",

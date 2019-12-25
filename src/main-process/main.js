@@ -1,15 +1,10 @@
 
-const { app, BrowserWindow, ipcMain } = require('electron');
-// const { AppUpdater } from './app-updater';
+const { app, BrowserWindow } = require('electron');
+const { initDebugger } = require('./utils/debugger');
 const url = require('url') ;
 const path = require('path');
 
 let mainWindow;
-
-
-if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')();
-}
 
 // const installExtensions = async () => {
 //   console.log('Running in development');
@@ -39,7 +34,7 @@ app.on('ready', async () => {
     },
   });
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.webContents.openDevTools();
+    initDebugger();
     // await installExtensions();
     // 开发环境下的时候加载的是远程地址
     mainWindow.loadURL('http://localhost:8080');
