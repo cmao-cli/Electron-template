@@ -1,3 +1,29 @@
+# ELECTRON TEMPLATE | 客户端项目模板
+
+## 下载
+
+装有yuumi cli的项目：
+
+```
+yuumi init electron-test
+
+// 然后选择electron-template
+```
+
+普通调试的项目：
+
+```
+git clone git@github.com:cmao-cli/Electron-template.git
+```
+注： 普通调试的情况下需要手动安装@cmao/yuumi和@mlz/pack
+`npm install @cmao/yuumi @mlz/pack -D`
+
+## 安装依赖
+
+```
+npm install
+```
+
 ### 项目目录结构
 
 ```js
@@ -77,8 +103,9 @@ npm run start会同时启动渲染进程和主进程。
 需要先修改start-main-dev命令中wait-on监听的端口为项目端口。
 启动项目的同时监听electron文件内容变化。
 ```js
-"start": "cross-env NODE_ENV=development npm run start-renderer-dev & npm run start-main-dev",
-"start-main-dev": "cross-env NODE_ENV=development electron ./src/main-process/main.js",
+"start": "concurrently \"npm run start-renderer-dev\" \"npm run start-main-dev\"",
+"watch": "concurrently \"npm run start-renderer-dev\" \"nodemon --delay 10ms --watch ./src/main-process --exec npm run start-main-dev\"",
+"start-main-dev": "wait-on http://localhost:8080 && cross-env NODE_ENV=development electron ./src/main-process/main.js",
 "start-renderer-dev": "cross-env NODE_ENV=development yuumi serve ./src/app/index.tsx",
 ```
 
