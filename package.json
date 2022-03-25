@@ -30,7 +30,7 @@
     "@types/react-redux": "^7.1.5",
     "@types/react-router": "^5.1.3",
     "@types/react-router-dom": "^5.1.3",
-    "electron": "^7.1.2",
+    "electron": "^13.6.6",
     "electron-builder": "^21.2.0",
     "electron-devtools-installer": "^2.2.4",
     "qiniu": "^7.2.2",
